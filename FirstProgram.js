@@ -34,3 +34,28 @@ line[4].style.color = 'blue';
 for (let i = 0; i < line.length; i++){
     line[i].style.fontStyle = 'italic';
 }
+
+//querySelector & querySelectorAll Methods
+// Write the code as shown in the video below:
+const mainHeading = document.querySelector('#main-heading');
+mainHeading.style.textAlign = 'end';
+
+const basketHeading = document.querySelector('#basket-heading');
+basketHeading.style.color = 'brown';
+
+const fruits = document.querySelectorAll('.fruit');
+
+fruits.forEach((fruit, index) => {
+    if (index % 2 === 1) { 
+        if (index === 1) {
+            fruit.style.backgroundColor = 'brown';
+            fruit.style.color = 'white';
+        } else if (index === 3) {
+            fruit.style.backgroundColor = 'brown';
+            fruit.style.color = 'white';
+        } else {
+            fruit.style.backgroundColor = 'red';
+            fruit.style.color = 'white';
+        }
+    }
+});
