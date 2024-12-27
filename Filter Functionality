@@ -1,0 +1,62 @@
+// Add input element inside form, before button, to take fruit description
+
+
+// Show the fruit description in italics on the next line
+
+
+// Create a filter that shows only those fruits whose either name or description or both matches the entered text
+document.addEventListener('DOMContentLoaded', function () {
+    // 1. Add input element for description
+    const form = document.querySelector('form');
+    const descriptionInput = document.createElement('input');
+    descriptionInput.type = 'text';
+    descriptionInput.id = 'description';  // Setting the id to 'description' as per the requirement
+    descriptionInput.name = 'description';
+    descriptionInput.placeholder = 'Enter fruit description';
+    form.insertBefore(descriptionInput, form.querySelector('button')); // Insert it before the button
+
+    // 2. Handle form submission to add fruit
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent form submission
+
+        const fruitName = document.getElementById('fruit-to-add').value.trim();
+        const fruitDescription = document.getElementById('description').value.trim();
+
+        // Ensure both fruit name and description are provided
+        if (fruitName && fruitDescription) {
+            const fruitList = document.querySelector('.fruits');
+            const listItem = document.createElement('li');
+            listItem.className = 'fruit';
+            listItem.innerHTML = `${fruitName}<p style="font-style: italic; margin: 0;">${fruitDescription}</p>`;
+            fruitList.appendChild(listItem);
+
+            // Reset input fields after submission
+            document.getElementById('fruit-to-add').value = '';
+            document.getElementById('description').value = '';
+        } else {
+            alert('Please provide both a fruit name and description.');
+        }
+    });
+
+    // 3. Create filter functionality
+    const filter = document.getElementById("filter");
+
+    filter.addEventListener("keyup", function (event) {
+        const textEntered = event.target.value.toLowerCase();  // Convert entered text to lowercase
+        const fruitItems = document.getElementsByClassName("fruit");  // Get all fruit items 
+
+        // Loop through each fruit item
+        for (let i = 0; i < fruitItems.length; i++) {
+            const currentFruitText = fruitItems[i].firstChild.textContent.toLowerCase();  // Get fruit name
+            const fruitDescription = fruitItems[i].querySelector('p') ? fruitItems[i].querySelector('p').textContent.toLowerCase() : '';  // Get fruit description
+
+            // Check if the entered text matches either the name or description
+            if (currentFruitText.indexOf(textEntered) === -1 && fruitDescription.indexOf(textEntered) === -1) {
+                fruitItems[i].style.display = "none";  // Hide if no match
+            } else {
+                fruitItems[i].style.display = "";  // Show if there's a match
+            }
+        }
+    });
+});
+
