@@ -59,3 +59,21 @@ fruits.forEach((fruit, index) => {
         }
     }
 });
+
+//Creating Elements & DOM Relations
+// Write your code below:
+const headerDiv = document.getElementById('header');
+const subHeading = document.createElement('h3');
+subHeading.textContent = 'Buy high quality organic fruits online';
+subHeading.style.fontStyle = 'italic'; 
+headerDiv.appendChild(subHeading);
+
+
+const secondDiv = headerDiv.nextElementSibling; 
+const paragraph = document.createElement('p');
+paragraph.textContent = 'Total fruits: 4'; 
+paragraph.id = 'fruits-total'; 
+const fruitList = secondDiv.querySelector('ul'); 
+secondDiv.insertBefore(paragraph, fruitList);
+
+//
