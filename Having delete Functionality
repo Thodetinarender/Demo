@@ -1,0 +1,63 @@
+function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const username = form.username.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+
+    if (!username || !email || !phone) {
+        alert("All fields are required!");
+        return;
+    }
+
+    const user = {
+        username: username,
+        email: email,
+        phone: phone,
+    };
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    users.push(user);
+
+    localStorage.setItem('users', JSON.stringify(users));
+
+    addUserToUI(user);
+
+}
+
+function addUserToUI(user) {
+    const ul = document.querySelector('ul');
+
+    const li = document.createElement('li');
+    li.textContent = `${user.username} - ${user.email} - ${user.phone}`;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.style.marginLeft = '10px';
+    deleteButton.onclick = function () {
+        deleteUser(user, li);
+    };
+
+    li.appendChild(deleteButton);
+    ul.appendChild(li);
+}
+
+function deleteUser(user, listItem) {
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    users = users.filter(
+        u => u.username !== user.username || u.email !== user.email || u.phone !== user.phone
+    );
+    localStorage.setItem('users', JSON.stringify(users));
+
+    listItem.remove();
+}
+
+window.onload = function () {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    users.forEach(user => addUserToUI(user));
+};
+
+module.exports = handleFormSubmit;
