@@ -7,7 +7,7 @@ function handleFormSubmit(event) {
     };
 
     axios
-        .post("https://crudcrud.com/api/316ecec8fa224c41a7249d959b1a8483/bookmarks", bookmarks)
+        .post("https://crudcrud.com/api/cc3ec3c497c14f04b0ba47abb1385317/bookmarks", bookmarks)
         .then((response) => {
             displayBookmark(response.data);
             event.target.reset();
@@ -47,7 +47,7 @@ function displayBookmark(bookmark) {
 // Fetch all bookmarks on page load
 window.onload = function () {
     axios
-        .get("https://crudcrud.com/api/316ecec8fa224c41a7249d959b1a8483/bookmarks")
+        .get("https://crudcrud.com/api/cc3ec3c497c14f04b0ba47abb1385317/bookmarks")
         .then((response) => {
             response.data.forEach((bookmark) => {
                 displayBookmark(bookmark);
@@ -62,7 +62,7 @@ window.onload = function () {
 function editBookmark(id) {
     // Fetch the bookmark data using its ID
     axios
-        .get(`https://crudcrud.com/api/316ecec8fa224c41a7249d959b1a8483/bookmarks/${id}`)
+        .get(`https://crudcrud.com/api/cc3ec3c497c14f04b0ba47abb1385317/bookmarks/${id}`)
         .then((response) => {
             const bookmark = response.data;
 
@@ -83,7 +83,7 @@ function editBookmark(id) {
 
                 // Send the updated data to the API
                 axios
-                    .put(`https://crudcrud.com/api/316ecec8fa224c41a7249d959b1a8483/bookmarks/${id}`, updatedBookmark)
+                    .put(`https://crudcrud.com/api/cc3ec3c497c14f04b0ba47abb1385317/bookmarks/${id}`, updatedBookmark)
                     .then(() => {
                         // Update the bookmark in the DOM
                         const bookmarkElement = document.getElementById(`bookmark-${id}`);
@@ -110,7 +110,7 @@ function editBookmark(id) {
 // Delete bookmark
 function deleteBookmark(id) {
     axios
-        .delete(`https://crudcrud.com/api/316ecec8fa224c41a7249d959b1a8483/bookmarks/${id}`)
+        .delete(`https://crudcrud.com/api/cc3ec3c497c14f04b0ba47abb1385317/bookmarks/${id}`)
         .then(() => {
             // Remove the bookmark from the DOM
             const bookmarkElement = document.getElementById(`bookmark-${id}`);
